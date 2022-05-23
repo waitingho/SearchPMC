@@ -4,6 +4,7 @@ const port = 3001
 
 const cheerio = require('cheerio');
 const axios = require('axios');
+const { resolve } = require('path');
 const data = []
 
 const lcscsearch = async (p) => {
@@ -13,50 +14,56 @@ const lcscsearch = async (p) => {
     url: `https://www.arrow.com/en/products/${p}/texas-instruments`,
   };
 
+  try {
+    let response = await axios(config);
+    const $ = cheerio.load(response.data);
 
-  axios(config)
-    .then(function (response) {
-      const $ = cheerio.load(response.data);
+    let tmp = {
+      partnumber: $('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.col-lg-7 > div.Product-Summary.row.ng-star-inserted > div > div > div.col-7 > h1 > span.product-summary-name--Original').text().trim(),
+      Inventory: $('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.PdpMobileTabs-panel.col-lg-5 > section > div.BuyingOptions > div:nth-child(1) > h2').text().trim(),
+      qty: $('#quantity20').text().trim(),
+      price: $('#price10').text().trim(),
+      qty2: $('#quantity21').text().trim(),
+      price2: $('#price11').text().trim(),
+    }
+    data.push(tmp)
+    console.log(data);
+    const fs = require('fs');
+    const content = JSON.stringify(data);
 
-      let tmp = {
-        partnumber: $('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.col-lg-7 > div.Product-Summary.row.ng-star-inserted > div > div > div.col-7 > h1 > span.product-summary-name--Original').text().trim(),
-        Inventory: $('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.PdpMobileTabs-panel.col-lg-5 > section > div.BuyingOptions > div:nth-child(1) > h2').text().trim(),
-        qty: $('#quantity20').text().trim(),
-        price: $('#price10').text().trim(),
-        qty2: $('#quantity21').text().trim(),
-        price2: $('#price11').text().trim(),
-      }
-      data.push(tmp)
-      console.log(data);
-      const fs = require('fs');
-      const content = JSON.stringify(data);
-
+    return await new Promise((resolve, reject) => {
       fs.appendFile("infoti.json", content, 'utf8', function (err) {
-        if (err) {
-          return console.log(err);
-        }
-        console.log("The file was saved!");
+        if (err) reject(err);
+        else resolve();
       });
-
-
-      console.log('-----------------------------------------------------------------')
-    })
-    .catch(function (error) {
-      console.log(error);
     });
-
+  } catch (err) { throw err; }
 }
+
+
 
 
 // const startTask = () => {
-const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT', 'CC2642R1FRGZR', 'TPS62050DGSR', 'TPS62160DGKR', 'TPS62160DGKT']
-for (let p of po) {
-  lcscsearch(p);
+// const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT', 'CC2642R1FRGZR', 'TPS62050DGSR', 'TPS62160DGKR', 'TPS62160DGKT']
+// for (let p of po) {
+//   lcscsearch(p);
 
-}
+// }
 
-app.get('/', (req, res) => {
-  res.send(data)
+app.get('/', async (req, res) => {
+  let promises = [];
+  try {
+    const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT', 'CC2642R1FRGZR', 'TPS62050DGSR', 'TPS62160DGKR', 'TPS62160DGKT']
+    for (let p of po) {
+      promises.push(new Promise(async (resolve, reject) => {
+        try { await lcscsearch(p); resolve(); } catch (err2) { reject(err2); }
+      }));
+    }
+    let ress = await Promise.all(promises);
+    res.send(data);
+  } catch (err) {
+    res.send('操');
+  }
 })
 
 // start and listen on the Express server
