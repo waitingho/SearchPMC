@@ -1,6 +1,6 @@
 const axios = require('axios')
 const https = require('https')
-const domain = 'http://ec2-35-87-214-114.us-west-2.compute.amazonaws.com:3001/'
+const domain = 'https://atlas.microsoft.com'
 let instance
 
 module.exports = function (context)
