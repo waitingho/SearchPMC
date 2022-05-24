@@ -30,7 +30,7 @@ const lcscsearch = async (p) => {
     const content = JSON.stringify(data);
 
     return await new Promise((resolve, reject) => {
-      fs.appendFile("infoti.json", content, 'utf8', function (err) {
+      fs.writeFile("infoti.json", content, 'utf8', function (err) {
         if (err) reject(err);
         else resolve();
       });
