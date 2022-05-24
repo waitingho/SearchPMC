@@ -6,7 +6,7 @@ const cheerio = require('cheerio');
 const axios = require('axios');
 const { resolve } = require('path');
 const data = []
-const getAxios = require('/home/ec2-user/SearchPMC/getAxios.js');
+
 const lcscsearch = async (p) => {
 
   var config = {
