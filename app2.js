@@ -20,9 +20,9 @@ const lcscsearch = async (p) => {
 
     let tmp = {
 
-      partnumber :$('#app > div.v-application--wrap > main > div > div > div.padX.padY.base > div > div > div.left > div.product-info > div.desc > table > tbody > tr:nth-child(2) > td:nth-child(2)').text().trim(),
-      Inventory : $('#app > div > main > div > div > div.padX.padY.base > div > div > div.right > div:nth-child(1) > div.ship-stock.box > div:nth-child(1)').text().trim()
-      // price: $('#pdpPricingAvailability > div.panel-body > div.pdp-pricing-table > table').text().trim().replace(/\s+/g, ' ').split(' ')
+      Partnumber: $('#app > div.v-application--wrap > main > div > div > div.padX.padY.base > div > div > div.left > div.product-info > div.desc > table > tbody > tr:nth-child(2) > td:nth-child(2)').text().trim(),
+      Inventory: $('#app > div > main > div > div > div.padX.padY.base > div > div > div.right > div:nth-child(1) > div.ship-stock.box > div:nth-child(1)').text().trim(),
+      Price: $('#app > div.v-application--wrap > main > div > div > div.padX.padY.base > div > div > div.right > div:nth-child(1) > div.box.ladder-price > table > tbody').text().trim().replace(/\s+/g, ' ')
     }
     data.push(tmp)
     console.log(data);
@@ -39,10 +39,10 @@ const lcscsearch = async (p) => {
 }
 
 
-app.get('/', async (req, res) => {
+app.get('/lcsc', async (req, res) => {
   let promises = [];
   try {
-    const po = ['MSP430FR2633IRHBR_C2053228','MSP430FR2633IRHBT_C173299', 'CC2642R1FRGZR_C2151618', 'TPS62050DGSR_C128604', 'TPS62160DGKR_C60726','TPS62160DGKT_C2070781']
+    const po = ['MSP430FR2633IRHBR_C2053228', 'MSP430FR2633IRHBT_C173299', 'CC2642R1FRGZR_C2151618', 'TPS62050DGSR_C128604', 'TPS62160DGKR_C60726', 'TPS62160DGKT_C2070781']
     // const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D']
     for (let p of po) {
       promises.push(new Promise(async (resolve, reject) => {
@@ -60,5 +60,5 @@ app.get('/', async (req, res) => {
 
 // start and listen on the Express server
 app.listen(port, () => {
-  console.log(`Express is running on http://localhost:${port}`)
+  console.log(`Express is running on http://localhost:${port}/lcsc`)
 })

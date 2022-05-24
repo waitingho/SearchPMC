@@ -19,9 +19,11 @@ const lcscsearch = async (p) => {
     const $ = cheerio.load(response.data);
 
     let tmp = {
-      partnumber: $('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.col-lg-7 > div.Product-Summary.row.ng-star-inserted > div > div > div.col-7 > h1 > span.product-summary-name--Original').text().trim(),
+      Partnumber: $('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.col-lg-7 > div.Product-Summary.row.ng-star-inserted > div > div > div.col-7 > h1 > span.product-summary-name--Original').text().trim(),
       Inventory: $('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.PdpMobileTabs-panel.col-lg-5 > section > div.BuyingOptions > div:nth-child(1) > h2').text().trim(),
-     leadtime: $('#content0 > li').text().trim()
+      Leadtime: $('#content0 > li').text().trim(),
+      Price: $('#ariaContainer0 > li:nth-child(2) > div:nth-child(2) > ol').text().trim()
+
     }
     data.push(tmp)
     console.log(data);
@@ -47,7 +49,7 @@ const lcscsearch = async (p) => {
 
 // }
 
-app.get('/', async (req, res) => {
+app.get('/arrow', async (req, res) => {
   let promises = [];
   try {
     const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT', 'CC2642R1FRGZR', 'TPS62050DGSR', 'TPS62160DGKR', 'TPS62160DGKT']
@@ -68,5 +70,5 @@ app.get('/', async (req, res) => {
 
 // start and listen on the Express server
 app.listen(port, () => {
-  console.log(`Express is running on http://localhost:${port}`)
+  console.log(`Express is running on http://localhost:${port}/arrow`)
 })
