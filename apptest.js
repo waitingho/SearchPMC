@@ -1,67 +1,81 @@
-// const puppeteer = require('puppeteer');
-// //引入cheerio
-// const cheerio = require('cheerio');
-// (async () => {
-//   const browser = await puppeteer.launch({headless: false, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'});
-//   const page = await browser.newPage();
-// //   await page.goto('https://www.ti.com.cn/product/zh-cn/CC2642R?keyMatch=CC2642R1FRGZR&tisearch=search-everything&usecase=OPN#order-quality');
-// await page.goto('https://tw.news.yahoo.com/%E5%A5%BD%E5%B8%82%E5%A4%9A-%E5%B7%A8%E5%AC%B0-%E5%86%8D%E7%8F%BE-%E7%B6%B2%E8%AB%B7-%E8%AB%8B%E9%97%9C%E6%87%B7%E7%89%B9%E6%AE%8A%E6%97%8F%E7%BE%A4-014532433.html');
-  
-//   //先等待網頁載入到底下的section的html標籤，不然有時候執行太快抓不到網頁
-//    await page.waitForSelector('section')
-  
-//   //把網頁的body抓出來
-//   let body = await page.content()
-  
-//   //接著我們把他丟給cheerio去處理
-//   let $ = await cheerio.load(body)
+const express = require('express')
+const app = express()
+const port = 3001
 
-
-// let data = await $('<h1 data-test-locator="headline">好市多「巨嬰」再現 網諷：請關懷特殊族群</h1>').text();
-//   console.log(data)
-  
-//   await browser.close()
-// })();
-
-
-const puppeteer = require('puppeteer');
 const cheerio = require('cheerio');
-(async () => {
-  const browser = await puppeteer.launch({headless: false, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'});
-    const page = await browser.newPage();
-    await page.goto('https://ithelp.ithome.com.tw/ironman');
-    await page.waitForSelector('section')
-    let body = await page.content()
-    let $ = await cheerio.load(body)
-    
-    //我們把cheerio找到的資料轉成文字並存進data這個變數
-    let data = await $('#main--ithelp > section.section-type > div > div > div:nth-child(4) > ul').text()
-    //並再終端機print出來
-    console.log(data)
+const axios = require('axios');
+const { resolve } = require('path');
+const data = []
+const https = require('https')
+const domain = 'http://ec2-35-87-214-114.us-west-2.compute.amazonaws.com:3001/'
+const lcscsearch = async (p) => {
 
-    await browser.close()
-})();
+  var config = {
+    method: 'get',
+    url: `https://www.arrow.com/en/products/${p}/texas-instruments`,
+  };
 
+  try {
+    let response = await axios(config);
+    const $ = cheerio.load(response.data);
 
-// const puppeteer = require('puppeteer');
+    let tmp = {
+      Partnumber: $('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.col-lg-7 > div.Product-Summary.row.ng-star-inserted > div > div > div.col-7 > h1 > span.product-summary-name--Original').text().trim(),
+      Inventory: $('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.PdpMobileTabs-panel.col-lg-5 > section > div.BuyingOptions > div:nth-child(1) > h2').text().trim(),
+      Leadtime: $('#content0 > li').text().trim(),
+      Price: $('#ariaContainer0 > li:nth-child(2) > div:nth-child(2) > ol').text().trim()
 
-// (async () => {
-//   // 啟動瀏覽器
-//   const browser = await puppeteer.launch({headless: false, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'});
+    }
+    data.push(tmp)
+    console.log(data);
+    const fs = require('fs');
+    const content = JSON.stringify(data);
 
-//   // 開啟分頁並前往 Google 頁面
-//   const page = await browser.newPage();
-//   await page.goto('https://www.google.com/');
+    return await new Promise((resolve, reject) => {
+      fs.appendFile("infoti.json", content, 'utf8', function (err) {
+        if (err) reject(err);
+        else resolve();
+      });
+    });
+  } catch (err) { throw err; }
+}
 
-//   // 進行 UI 操作
-//   page.keyboard.sendCharacter('辛比誌');
-//   page.keyboard.down('Enter');
+app.get('/arrow', async (req, res) => {
+  let promises = [];
+  try {
+    const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT', 'CC2642R1FRGZR', 'TPS62050DGSR', 'TPS62160DGKR', 'TPS62160DGKT']
+    // const po = ['MSP430FR2633IRHBR']
+    for (let p of po) {
+      promises.push(new Promise(async (resolve, reject) => {
+        try { await lcscsearch(p); resolve(); } catch (err2) { reject(err2); }
+      }));
+    }
+    let ress = await Promise.all(promises);
+    console.log('幹你娘')
+    res.send(data);
+  } catch (err) {
+    console.log(err);
+    res.send('操');
+  }
+})
 
-//   // 等待三秒
-//   await new Promise((resolve, reject) => setTimeout(resolve, 3000));
+let instance
 
-//   // 進行截圖
-//   await page.screenshot({ path: 'result.png' });
+module.exports = function (context) {
+  if (!instance) {
+    //create axios instance
+    instance = axios.create({
+      baseURL: domain,
+      timeout: 60000, //optional
+      httpsAgent: new https.Agent({ keepAlive: true }),
+      headers: { 'Content-Type': 'application/xml' }
+    })
+  }
 
-//   await browser.close();
-// })();
+  return instance;
+}
+
+// start and listen on the Express server
+app.listen(port, () => {
+  console.log(`Express is running on http://localhost:${port}/arrow`)
+})
