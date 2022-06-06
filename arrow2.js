@@ -17,7 +17,7 @@ const lcscsearch = async (p) => {
   var config = {
     method: 'get',
     url: `https://www.arrow.com/en/products/${p}/texas-instruments`,
-    timeout: 60000, //optional
+    timeout: 100000, //optional
     httpsAgent: new https.Agent({ keepAlive: true }),
   };
 
