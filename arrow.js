@@ -63,5 +63,5 @@ app.get('/lcsc', async (req, res) => {
 
 // start and listen on the Express server
 app.listen(port, () => {
-  console.log(`Express is running on http://localhost:${port}/lcsc`)
+  console.log(`Express is running on http://localhost:${port}/arrow`)
 })
