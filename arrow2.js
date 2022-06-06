@@ -8,7 +8,7 @@ const cheerio = require('cheerio');
 const axios = require('axios');
 const { resolve } = require('path');
 const data = []
-
+const https = require('https')
 const lcscsearch = async (p) => {
 
 
