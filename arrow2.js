@@ -3,7 +3,7 @@
 const express = require('express')
 const app = express()
 const port = 3001
-
+const getAxios = require('getAxios.js');
 const cheerio = require('cheerio');
 const axios = require('axios');
 const { resolve } = require('path');
@@ -62,25 +62,6 @@ app.get('/arrow', async (req, res) => {
     res.send('操');
   }
 })
-
-const https = require('https')
-const domain = 'https://www.arrow.com'
-let instance
-
-if (!instance) {
-
-  //create axios instance
-  instance = axios.create({
-    baseURL: domain,
-    timeout: 60000, //optional
-    httpsAgent: new https.Agent({ keepAlive: true }),
-    headers: { 'Content-Type': 'application/xml' }
-    
-  })
-  console.log("0.0.0.0.");
-}
-
-
 
 // start and listen on the Express server
 app.listen(port, () => {
