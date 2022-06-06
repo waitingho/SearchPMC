@@ -1,9 +1,10 @@
 const axios = require('axios')
 const https = require('https')
-const domain = 'https://atlas.microsoft.com'
+const domain = 'https://www.arrow.com/zh-cn'
 let instance
 
-module.exports = function (context)
+// module.exports = function (context)
+const arrow2 = () => {
 {
     if (!instance)
     {
@@ -18,3 +19,4 @@ module.exports = function (context)
 
     return instance;
 }
+module.exports = arrow2;
