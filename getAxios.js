@@ -3,8 +3,8 @@ const https = require('https')
 const domain = 'https://www.arrow.com/zh-cn'
 let instance
 
-// module.exports = function (context)
-const arrow2 = () => {
+module.exports = function ()
+// const arrow2 = () => {
 
     if (!instance)
     {
@@ -19,4 +19,4 @@ const arrow2 = () => {
 
     return instance;
 }
-module.exports = arrow2;
+// module.exports = arrow2;
