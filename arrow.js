@@ -9,7 +9,7 @@ const axios = require('axios');
 const { resolve } = require('path');
 const data = []
 
-const lcscsearch = async (p) => {
+const arrowsearch = async (p) => {
 
   var config = {
     method: 'get',
