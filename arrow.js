@@ -49,7 +49,7 @@ app.get('/arrow', async (req, res) => {
     const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT', 'CC2642R1FRGZR', 'TPS62050DGSR', 'TPS62160DGKR', 'TPS62160DGKT']
     for (let p of po) {
       promises.push(new Promise(async (resolve, reject) => {
-        try { await lcscsearch(p); resolve(); } catch (err2) { reject(err2); }
+        try { await arrowsearch(p); resolve(); } catch (err2) { reject(err2); }
       }));
     }
     let ress = await Promise.all(promises);
