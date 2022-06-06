@@ -11,7 +11,7 @@ module.exports = function ()
         //create axios instance
         instance = axios.create({
             baseURL: domain,
-            timeout: 60000, //optional
+            timeout: 100000, //optional
             httpsAgent: new https.Agent({ keepAlive: true }),
             headers: {'Content-Type':'application/xml'}
         })
