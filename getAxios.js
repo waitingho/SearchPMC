@@ -5,7 +5,7 @@ let instance
 
 // module.exports = function (context)
 const arrow2 = () => {
-{
+
     if (!instance)
     {
         //create axios instance
