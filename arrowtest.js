@@ -17,7 +17,7 @@ const lcscsearch = async (p) => {
     url: `https://www.arrow.com/zh-cn/components-services/why-components-services`,
     timeout: 60000, //optional
     maxContentLength: 10000000,
-    httpsAgent: new https.Agent({ keepAlive: falise }),
+    httpsAgent: new https.Agent({ keepAlive: false }),
   };
 
   try {
