@@ -1,5 +1,3 @@
-
-
 const express = require('express');
 const app = express();
 const port = 3001;
@@ -15,11 +13,13 @@ const lcscsearch = async (p) => {
   var config = {
     method: 'get',
     url: `https://www.arrow.com/zh-cn/components-services/why-components-services`,
-    timeout: 60000, //optional
-    maxContentLength: 10000000,
-    httpsAgent: new https.Agent({ keepAlive: false }),
+//     timeout: 60000, //optional
+//     maxContentLength: 10000000,
+//     httpsAgent: new https.Agent({ keepAlive: false }),
   };
 
+    axios.defaults.timeout = 60000;
+  axios.defaults.timeoutErrorMessage = 'timeout';
   try {
     let response = await axios(config);
     const $ = cheerio.load(response.data);
