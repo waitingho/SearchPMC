@@ -53,7 +53,7 @@ app.get('/arrow', async (req, res) => {
         try { await lcscsearch(p); resolve(); } catch (err2) { reject(err2); }
       }));
     }
-    let ress = await Promise.all(promises);
+    let res = await Promise.all(promises);
     console.log('幹你娘成功ㄌ')
     res.sendFile(data);
   } catch (err) {
@@ -63,7 +63,7 @@ app.get('/arrow', async (req, res) => {
   }
    
 }) 
-res.end();
+
 
 
 
