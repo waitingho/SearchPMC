@@ -61,6 +61,7 @@ app.get('/arrow', async (req, res) => {
   } catch (err) {
     console.log(err);
     res.send('哈哈白癡又失敗ㄌ');
+    const datta = data.length;
    console.log(datta);
   }
    
