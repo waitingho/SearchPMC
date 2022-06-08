@@ -18,8 +18,7 @@ const lcscsearch = async (p) => {
 //     httpsAgent: new https.Agent({ keepAlive: false }),
   };
 
-    axios.defaults.timeout = 60000;
-  axios.defaults.timeoutErrorMessage = 'timeout';
+   
   try {
     let response = await axios(config);
     const $ = cheerio.load(response.data);
