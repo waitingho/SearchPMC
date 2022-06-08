@@ -55,18 +55,18 @@ app.get('/arrow', async (req, res) => {
     }
     let ress = await Promise.all(promises);
     console.log('幹你娘成功ㄌ')
-    const datta = data.length;
-    console.log(datta);
+    
+console.log(JSON.stringify(req.headers))
     res.send(data);
   } catch (err) {
     console.log(err);
+    
+console.log(JSON.stringify(req.headers))
     res.send('哈哈白癡又失敗ㄌ');
-    const datta = data.length;
-   console.log(datta);
+   
   }
    
 }) 
-
 
 
 
