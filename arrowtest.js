@@ -54,11 +54,12 @@ app.get('/arrow', async (req, res) => {
       }));
     }
     let ress = await Promise.all(promises);
-    console.log('幹你娘')
+    console.log('幹你娘成功ㄌ')
     res.sendFile(data);
   } catch (err) {
     console.log(err);
-    res.send('操');
+    res.send('哈哈白癡又失敗ㄌ');
+    res.end();
   }
 })
 
