@@ -59,8 +59,9 @@ app.get('/arrow', async (req, res) => {
   } catch (err) {
     console.log(err);
     res.send('哈哈白癡又失敗ㄌ');
-    res.end();
+   
   }
+   res.end();
 })
 
 
