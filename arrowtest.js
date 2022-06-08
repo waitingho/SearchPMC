@@ -55,7 +55,7 @@ app.get('/arrow', async (req, res) => {
     }
     let ress = await Promise.all(promises);
     console.log('幹你娘')
-    res.send(data);
+    res.sendFile(data);
   } catch (err) {
     console.log(err);
     res.send('操');
