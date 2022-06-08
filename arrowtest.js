@@ -1,15 +1,15 @@
 
 
-const express = require('express')
-const app = express()
-const port = 3001
+const express = require('express');
+const app = express();
+const port = 3001;
 
 const cheerio = require('cheerio');
 const axios = require('axios').default;
 
 const { resolve } = require('path');
-const data = []
-const https = require('https')
+const data = [];
+const https = require('https');
 const lcscsearch = async (p) => {
 
   var config = {
