@@ -13,9 +13,9 @@ const lcscsearch = async (p) => {
   var config = {
     method: 'get',
     url: `https://www.arrow.com/zh-cn/components-services/why-components-services`,
-//     timeout: 60000, //optional
-//     maxContentLength: 10000000,
-//     httpsAgent: new https.Agent({ keepAlive: false }),
+    timeout: 60000, //optional
+    maxContentLength: 10000000,
+    httpsAgent: new https.Agent({ keepAlive: false }),
   };
 
    
