@@ -7,7 +7,7 @@ const cheerio = require('cheerio');
 
 
 const mesearch = async (p) => {
-    const browser = await puppeteer.launch({ headless: false, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' });
+    const browser = await puppeteer.launch({ headless: false, executablePath: '\home\ec2-user\.config\google-chrome' });
     const page = await browser.newPage();
     //ti url
     await page.goto(`https://www.mouser.tw/ProductDetail/Texas-Instruments/${p}`);
