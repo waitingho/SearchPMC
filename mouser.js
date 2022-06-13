@@ -36,8 +36,8 @@ const mesearch = async (p) => {
             let tmp = {
                 partnumber: $1('#pdpProdInfo > div.panel-heading.pdp-product-card-header').text().trim(),
                 inventory: $1('#pdpPricingAvailability > div.panel-body > div.row.pdp-product-availability > dl > dd:nth-child(2) > div.col-xs-3.onOrderQuantity').text().trim().replace(/\s+/g, ' '),
-                onOrder: $1('#content-onOrderShipments').text().trim(),
-               price: $1('#pdpPricingAvailability > div.panel-body > div.pdp-pricing-table > table > tbody').text().trim().replace(/\s+/g, ' ')
+                leader: $1('#content-onOrderShipments').text().trim(),
+                price: $1('#pdpPricingAvailability > div.panel-body > div.pdp-pricing-table > table > tbody').text().trim().replace(/\s+/g, ' ')
             }
 
             data.push(tmp)
