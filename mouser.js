@@ -29,9 +29,9 @@ const mesearch = async (p) => {
             //這是物件 不了解的可以搜尋了解一下
 
             let tmp = {
-                PartNumber: $1('#pdpProdInfo > div.panel-heading.pdp-product-card-header').text().trim(),
-                Inventory: $1('#pdpPricingAvailability > div.panel-body > div.row.pdp-product-availability > dl > dd:nth-child(2) > div.col-xs-3.onOrderQuantity').text().trim().replace(/\s+/g, ' '),
-                OnOrder: $1('#content-onOrderShipments').text().trim().replace(/\s+/g, ' ').replace(/檢視預期日期/g, '').replace(/隱藏日期/g, '').split(' '),
+                partNumber: $1('#pdpProdInfo > div.panel-heading.pdp-product-card-header').text().trim(),
+                inventory: $1('#pdpPricingAvailability > div.panel-body > div.row.pdp-product-availability > dl > dd:nth-child(2) > div.col-xs-3.onOrderQuantity').text().trim().replace(/\s+/g, ' '),
+                onOrder: $1('#content-onOrderShipments').text().trim().replace(/\s+/g, ' ').replace(/檢視預期日期/g, '').replace(/隱藏日期/g, '').split(' '),
                 pricing: $1('#pdpPricingAvailability > div.panel-body > div.pdp-pricing-table > table').text().trim().replace(/\s+/g, ' ').replace(' 零卷 / MouseReel™ †', '').slice(0, 3).slice(4, 6),
             }
 
