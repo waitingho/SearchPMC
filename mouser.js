@@ -13,8 +13,13 @@ const data = []
 const mesearch = async (p) => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
+    // await page.setDefaultNavigationTimeout(0);
     //mouser url
-    await page.goto(`https://www.mouser.tw/ProductDetail/Texas-Instruments/${p}`);
+    await page.goto(`https://www.mouser.tw/ProductDetail/Texas-Instruments/${p}``, {
+        waitUntil: 'load',
+        // Remove the timeout
+        timeout: 0
+    });
     // await page.waitForSelector('body')
     try {
         let body = await page.content()
