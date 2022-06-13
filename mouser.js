@@ -66,6 +66,7 @@ app.get('/mouser', async (req, res) => {
         }
         let ress = await Promise.all(promises);
         res.send(data);
+        console.log(data);
         console.log('幹你娘成功ㄌ');
     } catch (err) {
         res.send('白癡又失敗ㄌ');
