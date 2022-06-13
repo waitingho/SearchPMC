@@ -15,7 +15,7 @@ const mesearch = async (p) => {
     const page = await browser.newPage();
     // await page.setDefaultNavigationTimeout(0);
     //mouser url
-    await page.goto(`https://www.mouser.tw/ProductDetail/Texas-Instruments/${p}``, {
+    await page.goto(`https://www.mouser.tw/ProductDetail/Texas-Instruments/${p}`, {
         waitUntil: 'load',
         // Remove the timeout
         timeout: 0
