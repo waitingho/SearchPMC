@@ -64,10 +64,10 @@ console.log('幹你123娘');
 app.get('/mouser', async (req, res) => {
     let promises = [];
     try {
-           const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D','MSP430FR2633IRHBT?qs=VymPLiRQZISEXW%2FbVKpnJQ%3D%3D','CC2642R1FRGZR?qs=rrS6PyfT74fHZyxeWJx9DQ%3D%3D'];
+//            const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D','MSP430FR2633IRHBT?qs=VymPLiRQZISEXW%2FbVKpnJQ%3D%3D','CC2642R1FRGZR?qs=rrS6PyfT74fHZyxeWJx9DQ%3D%3D'];
 //         const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D','MSP430FR2633IRHBT?qs=VymPLiRQZISEXW%2FbVKpnJQ%3D%3D','CC2642R1FRGZR?qs=rrS6PyfT74fHZyxeWJx9DQ%3D%3D','TPS62050DGSR?qs=Gse6rAGbi7%252Bae8YoL367mQ%3D%3D','TPS62160DGKR?qs=2UFnnMkojnUsiNxEDO710Q%3D%3D'];
 //         const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D','MSP430FR2633IRHBT?qs=VymPLiRQZISEXW%2FbVKpnJQ%3D%3D'];
-//         const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D']
+        const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D']
         for (let p of po) {
             promises.push(new Promise(async (resolve, reject) => {
                 try { await mesearch(p); resolve(); } catch (err2) { reject(err2); }
