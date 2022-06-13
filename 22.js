@@ -69,7 +69,7 @@ app.get('/', async (req, res) => {
         console.log('幹你娘成功ㄌ');
     } catch (err) {
         res.send('白癡又失敗ㄌ');
-        console.log('白癡又失敗ㄌ');
+        console.log(err);
     }
 })
 
