@@ -9,11 +9,13 @@ const cheerio = require('cheerio');
 const port = 3001
 const { resolve } = require('path');
 const data = []
-const browser = await puppeteer. launch();
+
 const mesearch = async (p) => {
-//     const browser = await puppeteer.launch();
-    
-    const page = await browser.newPage();
+   const browser = await puppeteer.launch();
+   const browserWSEndpoint = browser.wsEndpoint();
+   browser.disconnect();
+   const browser2 = await puppeteer.connect({browserWSEndpoint});
+   const page = await browser2.newPage();
 //     await page.setDefaultNavigationTimeout(0);
     //mouser url
 //     await page.goto(`https://www.mouser.tw/ProductDetail/Texas-Instruments/${p}`)
