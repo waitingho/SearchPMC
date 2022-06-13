@@ -11,7 +11,7 @@ const { resolve } = require('path');
 const data = []
 
 const mesearch = async (p) => {
-    const browser = await puppeteer.launch({ headless: true, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' });
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
     //mouser url
     await page.goto(`https://www.mouser.tw/ProductDetail/Texas-Instruments/${p}`);
