@@ -11,7 +11,8 @@ const { resolve } = require('path');
 const data = []
 
 const mesearch = async (p) => {
-    const browser = await puppeteer.launch();
+//     const browser = await puppeteer.launch();
+    const browser = await puppeteer. connect();
     const page = await browser.newPage();
 //     await page.setDefaultNavigationTimeout(0);
     //mouser url
