@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer');
 const express = require('express');
 const app = express();
 const cheerio = require('cheerio');
-const port = 3002
+const port = 3001
 const { resolve } = require('path');
 const data = []
 
@@ -63,7 +63,7 @@ const mesearch = async (p) => {
 }
 
 console.log('幹你123娘');
-app.get('/mouser', async (req, res) => {
+app.get(':3001/mouser', async (req, res) => {
     let promises = [];
     try {
 //            const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D','MSP430FR2633IRHBT?qs=VymPLiRQZISEXW%2FbVKpnJQ%3D%3D','CC2642R1FRGZR?qs=rrS6PyfT74fHZyxeWJx9DQ%3D%3D'];
@@ -87,7 +87,7 @@ app.get('/mouser', async (req, res) => {
 
 // start and listen on the Express server
 app.listen(port, () => {
-    console.log(`Express is running on http://localhost:${port}/mouser`)
+    console.log(`Express is running on http://localhost:3001/mouser`)
 })
 
 
