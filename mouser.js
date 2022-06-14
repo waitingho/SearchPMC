@@ -63,7 +63,7 @@ const mesearch = async (p) => {
 }
 
 console.log('幹你123娘');
-app.get(':3001/mouser', async (req, res) => {
+app.get('/mouser', async (req, res) => {
     let promises = [];
     try {
 //            const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D','MSP430FR2633IRHBT?qs=VymPLiRQZISEXW%2FbVKpnJQ%3D%3D','CC2642R1FRGZR?qs=rrS6PyfT74fHZyxeWJx9DQ%3D%3D'];
