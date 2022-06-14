@@ -39,7 +39,7 @@ const lcscsearch = async (p) => {
 }
 
 
-app.get('3001/lcsc', async (req, res) => {
+app.get('/lcsc', async (req, res) => {
   let promises = [];
   try {
     const po = ['MSP430FR2633IRHBR_C2053228', 'MSP430FR2633IRHBT_C173299', 'CC2642R1FRGZR_C2151618', 'TPS62050DGSR_C128604', 'TPS62160DGKR_C60726', 'TPS62160DGKT_C2070781']
