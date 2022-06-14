@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer');
 const express = require('express');
 const app = express();
 const cheerio = require('cheerio');
-const port = 3001
+const port = 3002
 const { resolve } = require('path');
 const data = []
 
