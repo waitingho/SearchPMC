@@ -68,7 +68,7 @@ app.listen(port, () => {
 const puppeteer = require('puppeteer');
 const mesearch = async (p) => {
     
-    const browser = await puppeteer.launch({ headless: true, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' });
+    const browser = await puppeteer.launch();
 
         const page = await browser.newPage();
         await page.goto(`https://www.mouser.tw/ProductDetail/Texas-Instruments/${p}`);
