@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3001
+const port = 3000
 
 const cheerio = require('cheerio');
 const axios = require('axios');
@@ -60,5 +60,5 @@ app.get('/lcsc', async (req, res) => {
 
 // start and listen on the Express server
 app.listen(port, () => {
-  console.log(`Express is running on http://localhost:3001/lcsc`)
+  console.log(`Express is running on http://localhost:${port}/lcsc`)
 })
