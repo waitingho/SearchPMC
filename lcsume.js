@@ -83,10 +83,10 @@ try {
             //這是物件 不了解的可以搜尋了解一下
 
             let tmp = {
-                PartNumber: $1('#pdpProdInfo > div.panel-heading.pdp-product-card-header').text().trim(),
-                Inventory: $1('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.PdpMobileTabs-panel.col-lg-5 > section > div.BuyingOptions > div:nth-child(1) > h2').text().trim().replace(/\s+/g, ' '),
-                OnOrder: $1('#content-onOrderShipments').text().trim(),
-                price: $1('#pdpPricingAvailability > div.panel-body > div.pdp-pricing-table > table > tbody').text().trim().replace(/\s+/g, ' ')
+                partnumber: $1('#pdpProdInfo > div.panel-heading.pdp-product-card-header').text().trim(),
+                inventory: $1('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.PdpMobileTabs-panel.col-lg-5 > section > div.BuyingOptions > div:nth-child(1) > h2').text().trim().replace(/\s+/g, ' '),
+                price: $1('#pdpPricingAvailability > div.panel-body > div.pdp-pricing-table > table > tbody').text().trim().replace(/\s+/g, ' '),
+                leadtime: $1('#content-onOrderShipments').text().trim()
             }
 
             data.push(tmp)
