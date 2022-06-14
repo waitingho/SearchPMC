@@ -75,7 +75,7 @@ app.get('/mouser', async (req, res) => {
                 try { await mesearch(p); resolve(); } catch (err2) { reject(err2); }
             }));
         }
-        let ress = await Promise.any(promises);
+        let ress = await Promise.all(promises);
         res.send(data);
         console.log(data);
         console.log('幹你娘成功ㄌ');
