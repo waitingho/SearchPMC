@@ -52,7 +52,7 @@ app.get('/lcsc', async (req, res) => {
     }
     let ress = await Promise.all(promises);
     console.log('幹你娘')
-    res.send(data);
+    res.send(ress);
   } catch (err) {
     console.log(err);
     res.send('操');
