@@ -32,7 +32,7 @@ const lcscsearch = async (p) => {
     return await new Promise((resolve, reject) => {
       fs.writeFile("infoti.json", content, 'utf8', function (err) {
         if (err) reject(err);
-        else resolve();
+        else resolve(data);
       });
     });
   } catch (err) { throw err; }
