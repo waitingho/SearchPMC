@@ -151,28 +151,24 @@ const data3 = [];
 const arsearch = async (p) => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    // await page.setDefaultNavigationTimeout(0);
+    
     //mouser url
     await page.goto(`https://www.arrow.com/en/products/${p}/texas-instruments`);
     // await page.waitForSelector('body')
     try {
         let body = await page.content()
         let $ = await cheerio.load(body)
-
-
-
-        //我們把cheerio找到的資料轉成文字並存進data這個變數
+//我們把cheerio找到的資料轉成文字並存進data這個變數
         await $('body').each((i, el) => {
             let $1 = cheerio.load($(el).html())
             //裏面建立一個物件並把資料都放進去
             //這是物件 不了解的可以搜尋了解一下
 
             let tmp = {
-                partNumber: $1('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.col-lg-7 > div.Product-Summary.row.ng-star-inserted > div > div > div.col-7 > h1 > span.product-summary-name--Original').text().trim(),
-//                 inventory: $1('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.PdpMobileTabs-panel.col-lg-5 > section > div.BuyingOptions > div.BuyingOptions-content.BuyingOptions--noBorder.ng-star-inserted > h2').text().trim(),
+                partNumber: $1('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.col-lg-7 > div.Product-Summary.row.ng-star-inserted > div > div > div.col-7 > h1 > span.product-summary-name--Original').text().trim(),    
                 inventory: $1("#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.PdpMobileTabs-panel.col-lg-5 > section > div.BuyingOptions > div:nth-child(1) > h2").text().trim(),
-                leadtime: $1('#content0 > li > div:nth-child(1) > dl > dd').text().trim(),
-                price: $1('#ariaContainer0 > li:nth-child(2) > div:nth-child(2) > ol').text().trim().replace(/\s+/g, ' ')
+               price: $1('#ariaContainer0 > li:nth-child(2) > div:nth-child(2) > ol').text().trim().replace(/\s+/g, ' '),
+               leadtime: $1('#content0 > li > div:nth-child(1) > dl > dd').text().trim(),
             }
 
             data3.push(tmp)
@@ -181,7 +177,7 @@ const arsearch = async (p) => {
         // console.log("data爬到ㄌ");
 
         const fs = require('fs');
-        const content = JSON.stringify(data); //轉換成json格式
+        const content = JSON.stringify(data3); //轉換成json格式
         // await browser.close()
         return await new Promise((resolve, reject) => {
             fs.writeFile("infoti.json", content, 'utf8', function (err) {
