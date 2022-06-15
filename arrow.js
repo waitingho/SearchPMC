@@ -10,7 +10,7 @@ const { resolve } = require('path');
 const data = []
 
 const arsearch = async (p) => {
-    const browser = await puppeteer.launch({ headless: true, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' });
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
     // await page.setDefaultNavigationTimeout(0);
     //mouser url
