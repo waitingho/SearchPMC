@@ -12,7 +12,7 @@ const lcscsearch = async (p) => {
     method: 'get',
     url: `https://lcsc.com/product-detail/Microcontroller-Units-MCUs-MPUs-SOCs_Texas-Instruments-${p}.html`,
   };
-const data = [];
+  const data = [];
   try {
     let response = await axios(config);
     const $ = cheerio.load(response.data);
