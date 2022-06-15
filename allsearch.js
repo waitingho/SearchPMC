@@ -165,8 +165,8 @@ const arsearch = async (p) => {
             //這是物件 不了解的可以搜尋了解一下
 
             let tmp = {
-                partNumber: $1('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.col-lg-7 > div.Product-Summary.row.ng-star-inserted > div > div > div.col-7 > h1 > span.product-summary-name--Original').text().trim(),    
-                inventory: $1("#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.PdpMobileTabs-panel.col-lg-5 > section > div.BuyingOptions > div:nth-child(1) > h2").text().trim(),
+               partnumber: $1('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.col-lg-7 > div.Product-Summary.row.ng-star-inserted > div > div > div.col-7 > h1 > span.product-summary-name--Original').text().trim(),    
+               inventory: $1("#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.PdpMobileTabs-panel.col-lg-5 > section > div.BuyingOptions > div:nth-child(1) > h2").text().trim(),
                price: $1('#ariaContainer0 > li:nth-child(2) > div:nth-child(2) > ol').text().trim().replace(/\s+/g, ' '),
                leadtime: $1('#content0 > li > div:nth-child(1) > dl > dd').text().trim(),
             }
