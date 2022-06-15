@@ -1,12 +1,10 @@
-
-   
 const express = require('express')
 const app = express()
 const port = 3001
 const cheerio = require('cheerio');
 const axios = require('axios');
 const { resolve } = require('path');
-const data = [];
+// const data = [];
 
 const lcscsearch = async (p) => {
 
@@ -14,7 +12,7 @@ const lcscsearch = async (p) => {
     method: 'get',
     url: `https://lcsc.com/product-detail/Microcontroller-Units-MCUs-MPUs-SOCs_Texas-Instruments-${p}.html`,
   };
-
+const data = [];
   try {
     let response = await axios(config);
     const $ = cheerio.load(response.data);
