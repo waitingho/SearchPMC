@@ -6,8 +6,8 @@ const port = 3001
 const cheerio = require('cheerio');
 const axios = require('axios');
 const { resolve } = require('path');
-const data = []
-
+const data = [];
+const data2 = [];
 const lcscsearch = async (p) => {
 
   var config = {
@@ -90,13 +90,13 @@ try {
                 leadtime: $1('#content-onOrderShipments').text().trim()
             }
 
-            data.push(tmp)
+            data2.push(tmp)
         })
 
         // console.log("data爬到ㄌ");
 
         const fs = require('fs');
-        const content = JSON.stringify(data); //轉換成json格式
+        const content = JSON.stringify(data2); //轉換成json格式
         // await browser.close()
         return await new Promise((resolve, reject) => {
             fs.writeFile("infoti.json", content, 'utf8', function (err) {
@@ -128,9 +128,9 @@ app.get('/mouser', async (req, res) => {
         }
 
         let ress = await Promise.all(promises);
-        res.send(data);
+        res.send(data2);
         console.log('幹你娘成功ㄌ');
-        console.log(data);
+        console.log(data2);
     } catch (err) {
         res.send('白癡又失敗ㄌ');
         console.log('白癡又失敗ㄌ');
