@@ -153,7 +153,11 @@ const arsearch = async (p) => {
     const page = await browser.newPage();
     
     //mouser url
-    await page.goto(`https://www.arrow.com/en/products/${p}/texas-instruments`);
+    await page.goto(`https://www.arrow.com/en/products/${p}/texas-instruments`, {
+        waitUntil: 'load',
+        // Remove the timeout
+        timeout: 0
+    });
     // await page.waitForSelector('body')
     try {
         let body = await page.content()
