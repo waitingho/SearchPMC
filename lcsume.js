@@ -58,12 +58,12 @@ app.get('/lcsc', async (req, res) => {
     console.log(err);
     res.send('操');
   }
-})
+});
 
-// start and listen on the Express server
-app.listen(port, () => {
-  console.log(`Express is running on http://localhost:${port}/lcsc`)
-})
+// // start and listen on the Express server
+// app.listen(port, () => {
+//   console.log(`Express is running on http://localhost:${port}/lcsc`)
+// })
 
 
 const puppeteer = require('puppeteer');
@@ -139,9 +139,9 @@ app.get('/mouser', async (req, res) => {
 })
 
 // start and listen on the Express server
-// app.listen(port, () => {
-//     console.log(`Express is running on http://localhost:${port}`)
-// })
+app.listen(port, () => {
+    console.log(`Express is running on http://localhost:${port}`)
+})
 
 
 
