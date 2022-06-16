@@ -4,7 +4,7 @@ const port = 3001
 const cheerio = require('cheerio');
 const axios = require('axios');
 const { resolve } = require('path');
-// const data = [];
+const data = [];
 
 const lcscsearch = async (p) => {
 
@@ -12,7 +12,7 @@ const lcscsearch = async (p) => {
     method: 'get',
     url: `https://lcsc.com/product-detail/Microcontroller-Units-MCUs-MPUs-SOCs_Texas-Instruments-${p}.html`,
   };
-  const data = [];
+  
   try {
     let response = await axios(config);
     const $ = cheerio.load(response.data);
@@ -52,7 +52,7 @@ app.get('/lcsc', async (req, res) => {
     }
     let ress = await Promise.all(promises);
     console.log('幹你娘')
-    res.send(ress);
+    res.send(data);
   } catch (err) {
     console.log(err);
     res.send('操');
