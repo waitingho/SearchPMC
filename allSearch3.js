@@ -151,7 +151,7 @@ app.get('/mouser', async (req, res) => {
 
 // -----------------------------------------------------------------------------------arrow----------------------------------------------------------------------------------------
 const arrowSearch = async (p) => {
-    const browser = await puppeteer.launch({ headless: false, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' });
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.setRequestInterception(true);
     page.on('request', (request) => {
@@ -207,13 +207,13 @@ const arrowSearch = async (p) => {
     } catch (err) { throw err; }
 }
 
-
+console.log('幹你123娘');
 app.get('/arrow', async (req, res) => {
-    
+    // let promises = [];
     try {
         // const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT', 'CC2642R1FRGZR', 'TPS62050DGSR', 'TPS62160DGKR', 'TPS62160DGKT']
-        const po = ['MSP430FR2633IRHBR']
-//         const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT']
+        // const po = ['MSP430FR2633IRHBR']
+        const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT']
     //     for (let p of po) {
     //         promises.push(new Promise(async (resolve, reject) => {
     //             try { await arsearch(p); resolve(); } catch (err2) { reject(err2); }
