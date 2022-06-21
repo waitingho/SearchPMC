@@ -74,7 +74,7 @@ app.get('/lcsc', async (req, res) => {
 
 
 const mouserSearch = async (p) => {
-    const browser = await puppeteer.launch({ headless: false, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' });
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.setRequestInterception(true);
     page.on('request', (request) => {
