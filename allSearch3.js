@@ -141,7 +141,7 @@ app.get('/mouser', async (req, res) => {
         res.send(ress);
         console.log('幹你娘成功ㄌ');
         console.log(ress);
-        console.log(new Date());
+        
     } catch (err) {
         res.send('白癡又失敗ㄌ');
         console.log('白癡又失敗ㄌ');
@@ -207,9 +207,9 @@ const arrowSearch = async (p) => {
     } catch (err) { throw err; }
 }
 
-console.log('幹你123娘');
+
 app.get('/arrow', async (req, res) => {
-    // let promises = [];
+    
     try {
         // const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT', 'CC2642R1FRGZR', 'TPS62050DGSR', 'TPS62160DGKR', 'TPS62160DGKT']
         // const po = ['MSP430FR2633IRHBR']
