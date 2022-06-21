@@ -6,8 +6,11 @@ const port = 3001;
 const cheerio = require('cheerio');
 const axios = require('axios');
 const { resolve } = require('path');
-// const data = [];
+cconst puppeteer = require('puppeteer');
+const { SocketAddress } = require('net');
 
+
+// --------------------------------------------------------lcsc----------------------------------------------------------------------------------------
 
 app.listen(port, () => {
     console.log(`Express is running on http://localhost:${port}/mouser`)
@@ -76,13 +79,10 @@ app.get('/lcsc', async (req, res) => {
 
 
 // --------------------------------------------------------mouser----------------------------------------------------------------------------------------
-const puppeteer = require('puppeteer');
-const { SocketAddress } = require('net');
-const data2 = [];
-const mesearch = async (p) => {
 
-    const browser = await puppeteer.launch();
-    
+
+const mouserSearch = async (p) => {
+    const browser = await puppeteer.launch({ headless: false, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' });
     const page = await browser.newPage();
     await page.setRequestInterception(true);
     page.on('request', (request) => {
@@ -98,8 +98,11 @@ const mesearch = async (p) => {
         // Remove the timeout
         timeout: 0
     });
-
-// const data2 = [];
+    // puppeteer.launch({ headless: false, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' }).then(async browser => {
+    //     const page = await browser.newPage();
+    //     await page.goto(`https://www.mouser.tw/ProductDetail/Texas-Instruments/${p}`);
+    // });
+    const data2 = [];
     try {
         let body = await page.content()
         let $ = await cheerio.load(body)
@@ -129,7 +132,7 @@ const mesearch = async (p) => {
             fs.writeFile("infoti.json", content, 'utf8', function (err) {
                 if (err) reject(err);
 
-                else resolve();
+                else resolve(data2);
             });
         });
     } catch (err) { throw err; }
@@ -138,23 +141,23 @@ const mesearch = async (p) => {
 
 app.get('/mouser', async (req, res) => {
 
-    let promises = [];
+    // let promises = [];
     try {
-       // const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D', 'CC2642R1FRGZR?qs=rrS6PyfT74fHZyxeWJx9DQ%3D%3D', 'TPS62050DGSR?qs=Gse6rAGbi7%252Bae8YoL367mQ%3D%3D', 'TPS62160DGKR?qs=2UFnnMkojnUsiNxEDO710Q%3D%3D'];
-       const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D'];
-//         const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D', 'MSP430FR2633IRHBT?qs=VymPLiRQZISEXW%2FbVKpnJQ%3D%3D'];
+        const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D', 'CC2642R1FRGZR?qs=rrS6PyfT74fHZyxeWJx9DQ%3D%3D', 'TPS62050DGSR?qs=Gse6rAGbi7%252Bae8YoL367mQ%3D%3D', 'TPS62160DGKR?qs=2UFnnMkojnUsiNxEDO710Q%3D%3D'];
+        // const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D'];
+        // const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D', 'MSP430FR2633IRHBT?qs=VymPLiRQZISEXW%2FbVKpnJQ%3D%3D'];
 
-        for (let p of po) {
-            promises.push(new Promise(async (resolve, reject) => {
-                try { await mesearch(p); resolve(); } catch (err2) { reject(err2); }
-            }));
-        }
+        // for (let p of po) {
+        //     promises.push(new Promise(async (resolve, reject) => {
+        //         try { await mesearch(p); resolve(); } catch (err2) { reject(err2); }
+        //     }));
+        // }
 
-        let ress = await Promise.all(promises);
-        // const ress = await Promise.all(po.map(p => mesearch(p)))
-        res.send(data2);
+        // let ress = await Promise.all(promises);
+        const ress = await Promise.all(po.map(p => mouserSearch(p)))
+        res.send(ress);
         console.log('幹你娘成功ㄌ');
-        console.log(data2);
+        console.log(ress);
         console.log(new Date());
     } catch (err) {
         res.send('白癡又失敗ㄌ');
@@ -164,9 +167,8 @@ app.get('/mouser', async (req, res) => {
 })
 
 // -----------------------------------------------------------------------------------arrow----------------------------------------------------------------------------------------
-const data3 = [];
-const arsearch = async (p) => {
-    const browser = await puppeteer.launch();
+const arrowSearch = async (p) => {
+    const browser = await puppeteer.launch({ headless: false, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' });
     const page = await browser.newPage();
     await page.setRequestInterception(true);
     page.on('request', (request) => {
@@ -183,6 +185,7 @@ const arsearch = async (p) => {
         timeout: 0
     });
     // await page.waitForSelector('body')
+    const data3 = [];
     try {
         let body = await page.content()
         let $ = await cheerio.load(body)
@@ -223,17 +226,18 @@ const arsearch = async (p) => {
 
 console.log('幹你123娘');
 app.get('/arrow', async (req, res) => {
-    let promises = [];
+    // let promises = [];
     try {
-//         const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT', 'CC2642R1FRGZR', 'TPS62050DGSR', 'TPS62160DGKR', 'TPS62160DGKT']
-        const po = ['MSP430FR2633IRHBR']
-//         const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT']
-        for (let p of po) {
-            promises.push(new Promise(async (resolve, reject) => {
-                try { await arsearch(p); resolve(); } catch (err2) { reject(err2); }
-            }));
-        }
-        let ress = await Promise.all(promises);
+        // const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT', 'CC2642R1FRGZR', 'TPS62050DGSR', 'TPS62160DGKR', 'TPS62160DGKT']
+        // const po = ['MSP430FR2633IRHBR']
+        const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT']
+    //     for (let p of po) {
+    //         promises.push(new Promise(async (resolve, reject) => {
+    //             try { await arsearch(p); resolve(); } catch (err2) { reject(err2); }
+    //         }));
+    //     }
+        // let ress = await Promise.all(promises);
+        const ress = await Promise.all(po.map(p => arrowSearch(p)))
         res.send(data3);
         console.log('幹你娘成功ㄌ');
         console.log(data3);
@@ -243,5 +247,4 @@ app.get('/arrow', async (req, res) => {
         console.log(err);
     }
 })
-
 
