@@ -6,7 +6,7 @@ const port = 3001;
 const cheerio = require('cheerio');
 const axios = require('axios');
 const { resolve } = require('path');
-cconst puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer');
 const { SocketAddress } = require('net');
 
 
