@@ -54,8 +54,8 @@ const lcscSearch = async (p) => {
 app.get('/lcsc', async (req, res) => {
     // let promises = [];
     try {
-        const po = ['MSP430FR2633IRHBR_C2053228', 'MSP430FR2633IRHBT_C173299', 'CC2642R1FRGZR_C2151618', 'TPS62050DGSR_C128604', 'TPS62160DGKR_C60726', 'TPS62160DGKT_C2070781'];
-        // const po = ['MSP430FR2633IRHBR_C2053228']
+//         const po = ['MSP430FR2633IRHBR_C2053228', 'MSP430FR2633IRHBT_C173299', 'CC2642R1FRGZR_C2151618', 'TPS62050DGSR_C128604', 'TPS62160DGKR_C60726', 'TPS62160DGKT_C2070781'];
+        const po = ['MSP430FR2633IRHBR_C2053228']
         // const po = ['MSP430FR2633IRHBR_C2053228', 'MSP430FR2633IRHBT_C173299']
         // for (let p of po) {
         //     promises.push(new Promise(async (resolve, reject) => {
@@ -146,8 +146,8 @@ app.get('/mouser', async (req, res) => {
     let promises = [];
     try {
        // const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D', 'CC2642R1FRGZR?qs=rrS6PyfT74fHZyxeWJx9DQ%3D%3D', 'TPS62050DGSR?qs=Gse6rAGbi7%252Bae8YoL367mQ%3D%3D', 'TPS62160DGKR?qs=2UFnnMkojnUsiNxEDO710Q%3D%3D'];
-       // const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D'];
-        const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D', 'MSP430FR2633IRHBT?qs=VymPLiRQZISEXW%2FbVKpnJQ%3D%3D'];
+       const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D'];
+//         const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D', 'MSP430FR2633IRHBT?qs=VymPLiRQZISEXW%2FbVKpnJQ%3D%3D'];
 
         for (let p of po) {
             promises.push(new Promise(async (resolve, reject) => {
@@ -230,9 +230,9 @@ console.log('幹你123娘');
 app.get('/arrow', async (req, res) => {
     let promises = [];
     try {
-        // const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT', 'CC2642R1FRGZR', 'TPS62050DGSR', 'TPS62160DGKR', 'TPS62160DGKT']
+        const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT', 'CC2642R1FRGZR', 'TPS62050DGSR', 'TPS62160DGKR', 'TPS62160DGKT']
         // const po = ['MSP430FR2633IRHBR']
-        const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT']
+//         const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT']
         for (let p of po) {
             promises.push(new Promise(async (resolve, reject) => {
                 try { await arsearch(p); resolve(); } catch (err2) { reject(err2); }
