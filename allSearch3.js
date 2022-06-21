@@ -13,7 +13,7 @@ const { SocketAddress } = require('net');
 // --------------------------------------------------------lcsc----------------------------------------------------------------------------------------
 
 app.listen(port, () => {
-    console.log(`Express is running on http://localhost:${port}/mouser`)
+    console.log(`Express is running on http://localhost:${port}`)
 })
 
 const lcscSearch = async (p) => {
