@@ -99,12 +99,7 @@ const mesearch = async (p) => {
         timeout: 0
     });
 
-
-
-
-
-
-    // const data2 = [];
+// const data2 = [];
     try {
         let body = await page.content()
         let $ = await cheerio.load(body)
@@ -115,9 +110,9 @@ const mesearch = async (p) => {
             //這是物件 不了解的可以搜尋了解一下
 
             let tmp = {
-                PartNumber: $1('#pdpProdInfo > div.panel-heading.pdp-product-card-header').text().trim(),
-                Inventory: $1('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.PdpMobileTabs-panel.col-lg-5 > section > div.BuyingOptions > div:nth-child(1) > h2').text().trim().replace(/\s+/g, ' '),
-                OnOrder: $1('#content-onOrderShipments').text().trim(),
+                partnumber: $1('#pdpProdInfo > div.panel-heading.pdp-product-card-header').text().trim(),
+                inventory: $1('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.PdpMobileTabs-panel.col-lg-5 > section > div.BuyingOptions > div:nth-child(1) > h2').text().trim().replace(/\s+/g, ' '),
+                leadtime: $1('#content-onOrderShipments').text().trim(),
                 price: $1('#pdpPricingAvailability > div.panel-body > div.pdp-pricing-table > table > tbody').text().trim().replace(/\s+/g, ' ')
             }
 
@@ -201,7 +196,7 @@ const arsearch = async (p) => {
             //這是物件 不了解的可以搜尋了解一下
 
             let tmp = {
-                partNumber: $1(`<p> ${p} </p>`).text().trim(),
+                partnumber: $1(`<p> ${p} </p>`).text().trim(),
                 // inventory: $1('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.PdpMobileTabs-panel.col-lg-5 > section > div.BuyingOptions > div.BuyingOptions-content.BuyingOptions--noBorder.ng-star-inserted > h2').text().trim(),
                 inventory: $1("#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.PdpMobileTabs-panel.col-lg-5 > section > div.BuyingOptions > div:nth-child(1) > h2").text().trim(),
                 leadtime: $1('#content0 > li > div:nth-child(1) > dl > dd').text().trim(),
