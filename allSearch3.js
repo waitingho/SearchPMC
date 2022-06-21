@@ -36,7 +36,7 @@ const lcscSearch = async (p) => {
             price: $('#app > div.v-application--wrap > main > div > div > div.padX.padY.base > div > div > div.right > div:nth-child(1) > div.box.ladder-price > table > tbody').text().trim().replace(/\s+/g, ' ')
         }
         data.push(tmp);
-        // data.concat(tmp)
+        
         console.log(data);
 
         const fs = require('fs');
@@ -59,15 +59,7 @@ app.get('/lcsc', async (req, res) => {
     try {
 //         const po = ['MSP430FR2633IRHBR_C2053228', 'MSP430FR2633IRHBT_C173299', 'CC2642R1FRGZR_C2151618', 'TPS62050DGSR_C128604', 'TPS62160DGKR_C60726', 'TPS62160DGKT_C2070781'];
         const po = ['MSP430FR2633IRHBR_C2053228']
-        // const po = ['MSP430FR2633IRHBR_C2053228', 'MSP430FR2633IRHBT_C173299']
-        // for (let p of po) {
-        //     promises.push(new Promise(async (resolve, reject) => {
-        //         try {
-        //             await lcscsearch(p); resolve();
-        //         } catch (err2) { reject(err2); }
-        //     }));
-        // }
-        // let ress = await Promise.all(promises);
+        
         const ress = await Promise.all(po.map(p => lcscSearch(p)).concat())
         console.log('幹你娘 成功ㄌ')
         res.send(ress);
@@ -98,10 +90,7 @@ const mouserSearch = async (p) => {
         // Remove the timeout
         timeout: 0
     });
-    // puppeteer.launch({ headless: false, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' }).then(async browser => {
-    //     const page = await browser.newPage();
-    //     await page.goto(`https://www.mouser.tw/ProductDetail/Texas-Instruments/${p}`);
-    // });
+    
     const data2 = [];
     try {
         let body = await page.content()
@@ -147,13 +136,7 @@ app.get('/mouser', async (req, res) => {
         // const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D'];
         // const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D', 'MSP430FR2633IRHBT?qs=VymPLiRQZISEXW%2FbVKpnJQ%3D%3D'];
 
-        // for (let p of po) {
-        //     promises.push(new Promise(async (resolve, reject) => {
-        //         try { await mesearch(p); resolve(); } catch (err2) { reject(err2); }
-        //     }));
-        // }
-
-        // let ress = await Promise.all(promises);
+       
         const ress = await Promise.all(po.map(p => mouserSearch(p)))
         res.send(ress);
         console.log('幹你娘成功ㄌ');
@@ -209,7 +192,7 @@ const arrowSearch = async (p) => {
             data3.push(tmp)
         })
 
-        // console.log("data爬到ㄌ");
+        
 
         const fs = require('fs');
         const content = JSON.stringify(data3); //轉換成json格式
@@ -231,12 +214,7 @@ app.get('/arrow', async (req, res) => {
         // const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT', 'CC2642R1FRGZR', 'TPS62050DGSR', 'TPS62160DGKR', 'TPS62160DGKT']
         // const po = ['MSP430FR2633IRHBR']
         const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT']
-    //     for (let p of po) {
-    //         promises.push(new Promise(async (resolve, reject) => {
-    //             try { await arsearch(p); resolve(); } catch (err2) { reject(err2); }
-    //         }));
-    //     }
-        // let ress = await Promise.all(promises);
+    
         const ress = await Promise.all(po.map(p => arrowSearch(p)))
         res.send(data3);
         console.log('幹你娘成功ㄌ');
