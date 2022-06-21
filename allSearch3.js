@@ -192,7 +192,7 @@ const arrowSearch = async (p) => {
             data3.push(tmp)
         })
 
-        
+        // console.log("data爬到ㄌ");
 
         const fs = require('fs');
         const content = JSON.stringify(data3); //轉換成json格式
@@ -201,7 +201,7 @@ const arrowSearch = async (p) => {
             fs.writeFile("infoti.json", content, 'utf8', function (err) {
                 if (err) reject(err);
 
-                else resolve();
+                else resolve(data3);
             });
         });
     } catch (err) { throw err; }
@@ -214,11 +214,16 @@ app.get('/arrow', async (req, res) => {
         // const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT', 'CC2642R1FRGZR', 'TPS62050DGSR', 'TPS62160DGKR', 'TPS62160DGKT']
         // const po = ['MSP430FR2633IRHBR']
         const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT']
-    
+    //     for (let p of po) {
+    //         promises.push(new Promise(async (resolve, reject) => {
+    //             try { await arsearch(p); resolve(); } catch (err2) { reject(err2); }
+    //         }));
+    //     }
+        // let ress = await Promise.all(promises);
         const ress = await Promise.all(po.map(p => arrowSearch(p)))
-        res.send(data3);
+        res.send(ress);
         console.log('幹你娘成功ㄌ');
-        console.log(data3);
+        console.log(ress);
     } catch (err) {
         res.send('白癡又失敗ㄌ');
         console.log('白癡又失敗ㄌ');
