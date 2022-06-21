@@ -212,8 +212,8 @@ app.get('/arrow', async (req, res) => {
     
     try {
         // const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT', 'CC2642R1FRGZR', 'TPS62050DGSR', 'TPS62160DGKR', 'TPS62160DGKT']
-        // const po = ['MSP430FR2633IRHBR']
-        const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT']
+        const po = ['MSP430FR2633IRHBR']
+//         const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT']
     //     for (let p of po) {
     //         promises.push(new Promise(async (resolve, reject) => {
     //             try { await arsearch(p); resolve(); } catch (err2) { reject(err2); }
