@@ -76,7 +76,7 @@ app.get('/lcsc', async (req, res) => {
 
 
 // --------------------------------------------------------mouser----------------------------------------------------------------------------------------
-
+process.setMaxListeners(0);
 
 const mouserSearch = async (p) => {
     const browser = await puppeteer.launch();
