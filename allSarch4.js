@@ -6,7 +6,8 @@ const port = 3001;
 const cheerio = require('cheerio');
 const axios = require('axios');
 const { resolve } = require('path');
-// const data = [];
+const puppeteer = require('puppeteer');
+const { SocketAddress } = require('net');
 
 
 app.listen(port, () => {
@@ -75,10 +76,10 @@ app.get('/lcsc', async (req, res) => {
 
 
 // --------------------------------------------------------mouser----------------------------------------------------------------------------------------
-const puppeteer = require('puppeteer');
-const { SocketAddress } = require('net');
+
+
 const mouserSearch = async (p) => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ headless: false, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' });
     const page = await browser.newPage();
     await page.setRequestInterception(true);
     page.on('request', (request) => {
@@ -94,6 +95,7 @@ const mouserSearch = async (p) => {
         // Remove the timeout
         timeout: 0
     });
+
     const data2 = [];
     try {
         let body = await page.content()
@@ -117,7 +119,7 @@ const mouserSearch = async (p) => {
 
         const fs = require('fs');
         const content = JSON.stringify(data2); //轉換成json格式
-            return await new Promise((resolve, reject) => {
+        return await new Promise((resolve, reject) => {
             fs.writeFile("infoti.json", content, 'utf8', function (err) {
                 if (err) reject(err);
 
@@ -125,7 +127,6 @@ const mouserSearch = async (p) => {
             });
         });
     } catch (err) { throw err; }
-
 }
 
 app.get('/mouser', async (req, res) => {
@@ -136,7 +137,7 @@ app.get('/mouser', async (req, res) => {
         // const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D'];
         // const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT'];
 
-       
+
         const ress = await Promise.all(po.map(p => mouserSearch(p)))
         res.send(ress);
         console.log('幹你娘成功ㄌ');
