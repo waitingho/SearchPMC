@@ -136,13 +136,7 @@ app.get('/mouser', async (req, res) => {
         // const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D'];
         // const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT'];
 
-        // for (let p of po) {
-        //     promises.push(new Promise(async (resolve, reject) => {
-        //         try { await mesearch(p); resolve(); } catch (err2) { reject(err2); }
-        //     }));
-        // }
-
-        // let ress = await Promise.all(promises);
+       
         const ress = await Promise.all(po.map(p => mouserSearch(p)))
         res.send(ress);
         console.log('幹你娘成功ㄌ');
