@@ -77,9 +77,8 @@ app.get('/lcsc', async (req, res) => {
 // --------------------------------------------------------mouser----------------------------------------------------------------------------------------
 const puppeteer = require('puppeteer');
 const { SocketAddress } = require('net');
-// const data2 = [];
 const mouserSearch = async (p) => {
-    const browser = await puppeteer.launch({ headless: false, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' });
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.setRequestInterception(true);
     page.on('request', (request) => {
@@ -95,15 +94,6 @@ const mouserSearch = async (p) => {
         // Remove the timeout
         timeout: 0
     });
-    // await page.goto(`https://www.mouser.tw/c/?q=${p}`, {
-    //     waitUntil: 'load',
-    //     // Remove the timeout
-    //     timeout: 0
-    // });
-    // puppeteer.launch({ headless: false, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' }).then(async browser => {
-    //     const page = await browser.newPage();
-    //     await page.goto(`https://www.mouser.tw/ProductDetail/Texas-Instruments/${p}`);
-    // });
     const data2 = [];
     try {
         let body = await page.content()
@@ -116,7 +106,6 @@ const mouserSearch = async (p) => {
 
             let tmp = {
                 partnumber: $1('#pdpProdInfo > div.panel-heading.pdp-product-card-header').text().trim(),
-             
                 inventory: $1('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.PdpMobileTabs-panel.col-lg-5 > section > div.BuyingOptions > div:nth-child(1) > h2').text().trim().replace(/\s+/g, ' '),
                 leadtime: $1('#content-onOrderShipments').text().trim().replace(/檢視預期日期/g, ' ').replace(/隱藏日期/g, ' '),
                 qty: $1('#pdpPricingAvailability > div.panel-body > div.pdp-pricing-table > table').text().trim().slice(-200, -90).replace(/\s+/g, ' '),
@@ -128,10 +117,7 @@ const mouserSearch = async (p) => {
 
         const fs = require('fs');
         const content = JSON.stringify(data2); //轉換成json格式
-
-
-        
-        return await new Promise((resolve, reject) => {
+            return await new Promise((resolve, reject) => {
             fs.writeFile("infoti.json", content, 'utf8', function (err) {
                 if (err) reject(err);
 
@@ -176,7 +162,7 @@ app.get('/mouser', async (req, res) => {
 // -----------------------------------------------------------------------------------arrow----------------------------------------------------------------------------------------
 
 const arrowSearch = async (p) => {
-    const browser = await puppeteer.launch({ headless: false, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' });
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.setRequestInterception(true);
     page.on('request', (request) => {
@@ -220,11 +206,11 @@ const arrowSearch = async (p) => {
             data3.push(tmp)
         })
 
-        // console.log("data爬到ㄌ");
+       
 
         const fs = require('fs');
         const content = JSON.stringify(data3); //轉換成json格式
-        // await browser.close()
+       
         return await new Promise((resolve, reject) => {
             fs.writeFile("infoti.json", content, 'utf8', function (err) {
                 if (err) reject(err);
@@ -240,14 +226,7 @@ app.get('/arrow', async (req, res) => {
     // let promises = [];
     try {
         const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT', 'CC2642R1FRGZR', 'TPS62050DGSR', 'TPS62160DGKR', 'TPS62160DGKT']
-        // const po = ['MSP430FR2633IRHBR']
-        // const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT']
-        //     for (let p of po) {
-        //         promises.push(new Promise(async (resolve, reject) => {
-        //             try { await arsearch(p); resolve(); } catch (err2) { reject(err2); }
-        //         }));
-        //     }
-        // let ress = await Promise.all(promises);
+       
         const ress = await Promise.all(po.map(p => arrowSearch(p)))
         res.send(ress);
         console.log('幹你娘成功ㄌ');
@@ -262,7 +241,7 @@ app.get('/arrow', async (req, res) => {
 // -----------------------------------------------------------------------------------TexasInstruments----------------------------------------------------------------------------------------
 
 const tiSearch = async (p) => {
-    const browser = await puppeteer.launch({ headless: false, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' });
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.setRequestInterception(true);
     page.on('request', (request) => {
@@ -273,8 +252,8 @@ const tiSearch = async (p) => {
             request.continue();
         }
     });
-    //mouser url
-    https://www.ti.com/product/MSP430FR2633/part-details/MSP430FR2633IRHBR?keyMatch=MSP430FR2633IRHBR&tisearch=search-everything&usecase=OPN
+   
+   
     await page.goto(`https://www.ti.com/store/ti/en/p/product/?p=${p}&keyMatch=${p}`, {
         waitUntil: 'load',
         // Remove the timeout
@@ -294,9 +273,9 @@ const tiSearch = async (p) => {
 
             let tmp = {
                 partnumber: $1(`<p> ${p} </p>`).text().trim(),
-                // inventory: $1('#page > section > div.Pdp-layout > div.Pdp-layout-top.Content > div > div.PdpMobileTabs-panel.col-lg-5 > section > div.BuyingOptions > div.BuyingOptions-content.BuyingOptions--noBorder.ng-star-inserted > h2').text().trim(),
+               
                 Inventory: $1('#atc-out-of-stock-MSP430FR2633IRHBR > div > div > strong').text().trim(),
-                // Inventory1: $1(`#atc-in-stock-inventory-${p}`).text().trim(),
+                
                 Inventory1: $1(`#atc-in-stock-MSP430FR2633IRHBR > ul > li`).text().trim(),
                 pricing: $1('body > main > section > div.ti_p-row > div.ti_p-col-3.ti_p-col-tablet-4.ti_p-col-phone-12.u-hide-only-on-phone > div.ti_ocb-pricing-table.ti_p-layout-space-small > ti-card > table').text().trim().replace(/\s+/g, ' ')
             }
@@ -319,7 +298,7 @@ const tiSearch = async (p) => {
     } catch (err) { throw err; }
 }
 
-console.log('幹你123娘');
+
 app.get('/ti', async (req, res) => {
     // const account = `waiting@alzk.com.tw`;
     // const password = `Alzk1234`;
