@@ -117,7 +117,8 @@ const mouserSearch = async (p) => {
                 qty: $1('#pdpPricingAvailability > div.panel-body > div.pdp-pricing-table > table').text().trim().slice(-200, -90).replace(/\s+/g, ' '),
                 price: $1('#pdpPricingAvailability > div.panel-body > div.pdp-pricing-table > table').text().trim().slice(-100, -20).replace(/\s+/g, ' ')
             }
-            data2.push(tmp)
+            data2.push(tmp);
+            console.log(data2);
         })
 
 
