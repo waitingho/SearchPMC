@@ -8,7 +8,7 @@ const axios = require('axios');
 const { resolve } = require('path');
 const puppeteer = require('puppeteer');
 const { SocketAddress } = require('net');
-
+process.setMaxListeners(0);
 
 app.listen(port, () => {
     console.log(`Express is running on http://localhost:${port}/mouser`)
@@ -76,21 +76,21 @@ app.get('/lcsc', async (req, res) => {
 
 
 // --------------------------------------------------------mouser----------------------------------------------------------------------------------------
-process.setMaxListeners(0);
+
 
 
 // const data2 = [];
 const mouserSearch = async (p) => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.setRequestInterception(true);
-    page.on('request', (request) => {
-        if (['image', 'stylesheet', 'font', 'script'].indexOf(request.resourceType()) !== -1) {
-            request.abort();
-        } else {
-            request.continue();
-        }
-    });
+//     await page.setRequestInterception(true);
+//     page.on('request', (request) => {
+//         if (['image', 'stylesheet', 'font', 'script'].indexOf(request.resourceType()) !== -1) {
+//             request.abort();
+//         } else {
+//             request.continue();
+//         }
+//     });
 
     await page.goto(`https://www.mouser.tw/ProductDetail/${p}`, {
         waitUntil: 'load',
