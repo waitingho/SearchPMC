@@ -78,6 +78,9 @@ app.get('/lcsc', async (req, res) => {
 // --------------------------------------------------------mouser----------------------------------------------------------------------------------------
 process.setMaxListeners(0);
 
+nst puppeteer = require('puppeteer');
+const { SocketAddress } = require('net');
+// const data2 = [];
 const mouserSearch = async (p) => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
@@ -95,7 +98,15 @@ const mouserSearch = async (p) => {
         // Remove the timeout
         timeout: 0
     });
-
+    // await page.goto(`https://www.mouser.tw/c/?q=${p}`, {
+    //     waitUntil: 'load',
+    //     // Remove the timeout
+    //     timeout: 0
+    // });
+    // puppeteer.launch({ headless: false, executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' }).then(async browser => {
+    //     const page = await browser.newPage();
+    //     await page.goto(`https://www.mouser.tw/ProductDetail/Texas-Instruments/${p}`);
+    // });
     const data2 = [];
     try {
         let body = await page.content()
@@ -137,7 +148,13 @@ app.get('/mouser', async (req, res) => {
         // const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D'];
         // const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT'];
 
+        // for (let p of po) {
+        //     promises.push(new Promise(async (resolve, reject) => {
+        //         try { await mesearch(p); resolve(); } catch (err2) { reject(err2); }
+        //     }));
+        // }
 
+        // let ress = await Promise.all(promises);
         const ress = await Promise.all(po.map(p => mouserSearch(p)))
         res.send(ress);
         console.log('幹你娘成功ㄌ');
