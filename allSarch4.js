@@ -84,13 +84,13 @@ const mouserSearch = async (p) => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.setRequestInterception(true);
-//     page.on('request', (request) => {
-//         if (['image', 'stylesheet', 'font', 'script'].indexOf(request.resourceType()) !== -1) {
-//             request.abort();
-//         } else {
-//             request.continue();
-//         }
-//     });
+    page.on('request', (request) => {
+        if (['image', 'stylesheet', 'font', 'script'].indexOf(request.resourceType()) !== -1) {
+            request.abort();
+        } else {
+            request.continue();
+        }
+    });
 
     await page.goto(`https://www.mouser.tw/ProductDetail/${p}`, {
         waitUntil: 'load',
@@ -143,9 +143,9 @@ app.get('/mouser', async (req, res) => {
 
     // let promises = [];
     try {
-        const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D', 'MSP430FR2633IRHBT?qs=VymPLiRQZISEXW%2FbVKpnJQ%3D%3D', 'TPS62160DGKT?qs=2UFnnMkojnVQry4yr%2Fdsnw%3D%3D', 'CC2642R1FRGZR?qs=rrS6PyfT74fHZyxeWJx9DQ%3D%3D', 'TPS62050DGSR?qs=Gse6rAGbi7%252Bae8YoL367mQ%3D%3D', 'TPS62160DGKR?qs=2UFnnMkojnUsiNxEDO710Q%3D%3D'];
+//         const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D', 'MSP430FR2633IRHBT?qs=VymPLiRQZISEXW%2FbVKpnJQ%3D%3D', 'TPS62160DGKT?qs=2UFnnMkojnVQry4yr%2Fdsnw%3D%3D', 'CC2642R1FRGZR?qs=rrS6PyfT74fHZyxeWJx9DQ%3D%3D', 'TPS62050DGSR?qs=Gse6rAGbi7%252Bae8YoL367mQ%3D%3D', 'TPS62160DGKR?qs=2UFnnMkojnUsiNxEDO710Q%3D%3D'];
         // const po = ['MSP430FR2633IRHBR?qs=VymPLiRQZITRQFkH8VS6GQ%3D%3D'];
-        // const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT'];
+        const po = ['MSP430FR2633IRHBR', 'MSP430FR2633IRHBT'];
 
         // for (let p of po) {
         //     promises.push(new Promise(async (resolve, reject) => {
