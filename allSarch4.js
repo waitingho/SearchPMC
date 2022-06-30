@@ -92,7 +92,13 @@ const mouserSearch = async (p) => {
         }
     });
 
- await page.goto(`https://www.mouser.tw/ProductDetail/Texas-Instruments/${p}`, {
+//  await page.goto(`https://www.mouser.tw/ProductDetail/Texas-Instruments/${p}`, {
+//         waitUntil: 'load',
+//         // Remove the timeout
+//         timeout: 0
+//     });
+    
+    await page.goto(`https://www.mouser.tw/ProductDetail/${p}`, {
         waitUntil: 'load',
         // Remove the timeout
         timeout: 0
